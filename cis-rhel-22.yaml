@@ -1,0 +1,15 @@
+---
+- name: Perform audit
+  hosts: target
+  roles: 
+    - audit
+  tags: ["always", "audit"]
+
+- name: Perform remediation
+  hosts: target
+  roles:
+    - remediation_soft 
+    - remediation_hard
+  tags: ["always", "remediation"]
+    
+  

@@ -1,0 +1,31 @@
+---
+# list of vulnerable services
+csi_services_list:
+  - xinetd
+  - xorg-x11-server-common
+  - avahi-autoipd avahi
+  - cups
+  - dhcp-server
+  - bind
+  - ftp
+  - vsftpd
+  - tftp-server
+  - httpd 
+  - nginx
+  - dovecot 
+  - cyrus-imapd
+  - samba
+  - squid
+  - net-snmp
+  - ypserv
+  - telnet-server
+  - nfs-utils
+  - rpcbind
+  - rsync
+
+# list of sercies that can be masked
+csi_maskable_services:
+  - nfs-server
+  - rpcbind
+  - rpcbind.socket
+  - rsync

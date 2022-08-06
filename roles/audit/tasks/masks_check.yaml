@@ -1,0 +1,12 @@
+- name: Check if unnecesary services are masked
+  block:
+    - name: Check if {{ item }} service is masked
+      shell: systemctl is-enabled {{ item }}
+      register: mask_output
+      changed_when: false
+      failed_when: mask_output.stdout == "enabled"
+
+  rescue:
+    - name: Append {{ item }} to non-masked services list
+      set_fact:
+        services_without_mask: "{{ services_without_mask + [item] }}"

@@ -1,0 +1,2 @@
+# initialization of list to store non-masked services
+services_without_mask: []
