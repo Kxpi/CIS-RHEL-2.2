@@ -1,22 +1,13 @@
+---
 - name: Audit summary
   block:
-    - name: Fail audit
-      fail:
-        msg: Audit failed
-      when: (packages_delta | length > 0) or (mta_remedation is defined) or (services_without_mask | length > 0)
-  
-    - name: Audit successful
-      debug: 
-        msg: Audit passed - no vulnerabilities found
-
-  rescue:
     - name: Packages check result
       debug: 
         msg: "Found {{ packages_delta | length }} unnecesary package(s): {{ packages_delta }}"
 
     - name: MTA check result
       debug:
-        msg: MTA listens on loopback addresses
+        msg: MTA listens on non-loopback addresses
       when: mta_remedation is defined
 
     - name: Masked services check result

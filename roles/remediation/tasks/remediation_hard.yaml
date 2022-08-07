@@ -1,0 +1,11 @@
+---
+- name: Show remediation plan - hard
+  debug: 
+    msg: 
+      - "{{ packages_list | length }} package(s) will be removed: {{ packages_list }}"
+
+- name: Uninstall all unnecessary packages
+  dnf:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ packages_list }}"

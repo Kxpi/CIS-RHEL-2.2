@@ -1,9 +1,10 @@
 ---
 # list of vulnerable services
-csi_services_list:
+csi_packages_list:
   - xinetd
   - xorg-x11-server-common
-  - avahi-autoipd avahi
+  - avahi-autoipd 
+  - avahi
   - cups
   - dhcp-server
   - bind

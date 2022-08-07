@@ -6,7 +6,7 @@
   import_tasks: mta_check.yaml
 
 - name: Check services masks
-  include_tasks: masks_check.yaml
+  include_tasks: masked_services_check.yaml
   loop: "{{ csi_maskable_services }}"
 
 - name: Show audit summary

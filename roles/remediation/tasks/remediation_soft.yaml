@@ -1,0 +1,31 @@
+---
+- name: Prepare packages list to uninstall
+  block:
+    - name: Delete packages that need to be masked from list
+      set_fact:
+        packages_list: "{{ packages_list | difference([item]) }}"
+      loop: "{{ mask_services }}"
+
+    # different name for service and package requires additional check
+    - name: Check if nfs-utils should be removed
+      set_fact:
+        packages_list: "{{ packages_list | difference(['nfs-utils']) }}"
+      when: "'nfs-server' in mask_services"
+
+    - name: Show remediation plan
+      debug: 
+        msg: 
+          - "{{ packages_list | length }} package(s) will be removed: {{ packages_list }}"
+          - "{{ mask_services | length }} service(s) will be masked: {{ mask_services }}"
+
+- name: Uninstall packages
+  dnf:
+    name: "{{ item }}"
+    state: absent
+  loop: "{{ packages_list }}"
+
+- name: Mask services
+  systemd:
+    name: "{{ item }}"
+    masked: true
+  loop: "{{ mask_services }}"

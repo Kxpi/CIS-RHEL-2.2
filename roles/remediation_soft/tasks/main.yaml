@@ -1,6 +1,0 @@
----
-- name: Audit result
-  debug:
-    msg: "Found {{ packages_delta | length }} package(s): {{ packages_delta }}"
-  failed_when: packages_delta | length > 0
-  ignore_errors: true

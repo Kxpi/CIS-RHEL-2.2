@@ -9,8 +9,4 @@
 
 - name: Check for unwanted packages
   set_fact:
-    packages_delta: "{{ target_packages | intersect(csi_services_list) }}"
-
-- name: Packages delta
-  debug:
-    msg: "Found {{ packages_delta | length }} unnecesary package(s): {{ packages_delta }}"
+    packages_delta: "{{ target_packages | intersect(csi_packages_list) }}"

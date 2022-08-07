@@ -1,0 +1,6 @@
+---
+# this variable uses packages list from group_vars unless there is a list from audit
+packages_list: "{{ packages_delta | default( csi_packages_list ) }}"
+
+# this variable uses non-masked services list from group_vars unless there is a list from audit
+mask_services: "{{ services_without_mask | default( csi_maskable_services ) }}"
