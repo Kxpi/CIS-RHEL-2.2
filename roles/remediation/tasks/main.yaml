@@ -1,5 +1,4 @@
 ---
-  # fix MTA to not listen on non-loopback
 - name: MTA remediation
   include_tasks: mta_remediation.yaml
   when: mta_remediation
