@@ -1,0 +1,12 @@
+---
+- name: Perform audit
+  hosts: target
+  roles: 
+    - audit
+  tags: ["audit"]
+
+- name: Perform remediation
+  hosts: target
+  roles:
+    - remediation
+  tags: ["remediation"]

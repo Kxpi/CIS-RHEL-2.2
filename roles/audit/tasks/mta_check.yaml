@@ -1,0 +1,13 @@
+---
+- name: Check if MTA is configured for local-only mode
+  block:
+    - name: Check if MTA is listening on any non-loopback address
+      shell: ss -lntu | grep -E ':25\s' | grep -E -v '\s(127.0.0.1|\[?::1\]?):25\s'
+      register: mta_output
+      changed_when: false
+      failed_when: mta_output.stdout != ""
+
+  rescue: 
+    - name: Mark MTA as vulnerable if check failed
+      set_fact:
+        mta_remedation: true

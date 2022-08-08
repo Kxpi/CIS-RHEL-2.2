@@ -1,0 +1,12 @@
+---
+- name: Get target node info
+  package_facts:
+    manager: auto
+
+- name: Extract list of packages
+  set_fact:
+    target_packages: "{{ ansible_facts.packages.keys() }}"
+
+- name: Check for unwanted packages
+  set_fact:
+    packages_delta: "{{ target_packages | intersect(csi_packages_list) }}"

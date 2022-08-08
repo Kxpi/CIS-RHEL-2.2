@@ -1,0 +1,6 @@
+---
+# indicates if to perform hard remediation - defaults to false
+remediation_hard: "{{ remediation_hard_mode | default( false ) }}"
+
+# indicates mta vulnerability, defaults to true
+mta_remediation: true

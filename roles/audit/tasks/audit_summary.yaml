@@ -1,0 +1,15 @@
+---
+- name: Audit summary
+  block:
+    - name: Packages check result
+      debug: 
+        msg: "Found {{ packages_delta | length }} unnecesary package(s): {{ packages_delta }}"
+
+    - name: MTA check result
+      debug:
+        msg: MTA listens on non-loopback addresses
+      when: mta_remedation is defined
+
+    - name: Masked services check result
+      debug:
+        msg: "Found {{ services_without_mask | length }} non-masked services: {{ services_without_mask }}"

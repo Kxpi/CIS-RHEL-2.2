@@ -1,0 +1,25 @@
+---
+- name: Fix MTA loopback listening
+  block:
+    - name: Check postfix config presence
+      stat:
+        path: /etc/postfix/main.cf
+      register: postfix_cf_path
+      failed_when: not postfix_cf_path.stat.exists
+
+    - name: Change inet_interfaces to loopback-only
+      lineinfile:
+        path: /etc/postfix/main.cf
+        search_string: "inet_interfaces"
+        line: "inet_interfaces = loopback-only"
+
+    - name: Restart postfix service
+      systemd:
+        state: restarted
+        daemon_reload: true
+        name: postfix
+
+  rescue:
+    - name: Postfix presence check failed
+      debug:
+        msg: Postfix config file not found
