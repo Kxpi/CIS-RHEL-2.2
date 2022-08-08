@@ -1,12 +1,15 @@
 ---
+  # fix MTA to not listen on non-loopback
 - name: MTA remediation
   include_tasks: mta_remediation.yaml
   when: mta_remediation
 
-- name: Soft remediation # uninstall and mask services
+  # uninstall packages and mask services
+- name: Soft remediation
   include_tasks: remediation_soft.yaml
   when: not remediation_hard
-
-- name: Hard remediation # uninstall all
+  
+  # uninstall all packages
+- name: Hard remediation
   include_tasks: remediation_hard.yaml
   when: remediation_hard

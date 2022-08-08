@@ -1,9 +1,0 @@
----
-# here you can specify wchich services you want to mask
-services_without_mask:
-  - nfs-server
-  - rpcbind
-  - rpcbind.socket
-  - rsync
-
-remediation_hard_mode: true

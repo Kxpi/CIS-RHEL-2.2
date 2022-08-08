@@ -12,7 +12,7 @@
         packages_list: "{{ packages_list | difference(['nfs-utils']) }}"
       when: "'nfs-server' in mask_services"
 
-    - name: Show remediation plan
+    - name: Show remediation plan - soft
       debug: 
         msg: 
           - "{{ packages_list | length }} package(s) will be removed: {{ packages_list }}"
